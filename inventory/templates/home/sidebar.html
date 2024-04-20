@@ -14,15 +14,26 @@
     text-wrap:calc(0);
     cursor: pointer;
 }
+ul{
+    list-style: none;
+    padding: 0;
+}
 .sidebar>ul>li:hover {
-    background-color: grey;
-    color: white;
+    background-color: rgb(236, 236, 236);
+    color: rgb(0, 0, 0);
     cursor: pointer;
     padding-left: 10px;
     transition: background-color 0.3s, padding-left 0.3s;
 }
 .sidebar>ul>li {
-    display: block;
+    height: 50px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+a{
+    text-decoration: none;
+    color: black;
 }
 
 </style>
@@ -32,11 +43,14 @@
     </div>
     <hr>
     <ul>
-        <li><i class="fa fa-home mx-2" aria-hidden="true"></i>Dashboard<br><br></li>
+        <li><i class="fa fa-home mx-2" aria-hidden="true"></i>Dashboard</li>
         <!-- <li><i class="fa fa-home mx-2" aria-hidden="true"></i>Dashboard<br><br></li> -->
-        <li><i class="fa fa-square-check mx-2" aria-hidden="true"></i> My Products<br><br></li>
-        <li><i class="fa fa-circle-plus mx-2" aria-hidden="true"></i> Add Product<br><br></li>
-        <li><i class="fa fa-arrow-trend-up mx-2" aria-hidden="true"></i> Stock Management<br><br></li>
-        <li><i class="fa fa-chart-simple mx-2" aria-hidden="true"></i> Reports & Analytics<br><br></li>
+        <li><a href="{% url 'view-products' %}"><i class="fa fa-square-check mx-2" aria-hidden="true"></i> Stock Management </a></li>
+         <li><a href="{% url 'add-products' %}"><i class="fa fa-circle-plus mx-2" aria-hidden="true"></i> Add Product </a></li>
+        <li><i class="fa fa-chart-simple mx-2" aria-hidden="true"></i> Reports & Analytics</li>
+        <li><i class="fa fa-cart-shopping mx-2" aria-hidden="true"></i> Store Manager</li>
+        <li class="bg-primary text-white"><a href="{% url 'initiate-order' %}"> <i class="fa fa-plus-circle mx-2" aria-hidden="true"></i> Record New Order</a></li>
+
+
     </ul>
 </div>

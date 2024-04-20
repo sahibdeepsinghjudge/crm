@@ -24,9 +24,14 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         if not self.unique_id:
             date = timezone.now().strftime("%Y%m%d%H%M%S%f")
-            self.unique_id = date + str(self.id)
+            self.unique_id = date
         super(Product, self).save(*args, **kwargs)
     
+    def profit(self):
+        profit = self.selling_price - self.cost_price
+        profit_percentage = (profit/self.cost_price)*100
+        return f'{profit} ({profit_percentage}%)' 
+
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
