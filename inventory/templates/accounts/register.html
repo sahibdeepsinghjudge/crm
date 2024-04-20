@@ -1,0 +1,102 @@
+{% extends 'home/base.html' %}
+{% block content %}
+<style>
+    .center-box {
+        width: 800px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .login-btn {
+        background-color: rgb(197, 110, 199);
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+    }
+</style>
+<div class="center-box">
+    <div class="row shadow-sm rounded " style="height:auto;">
+        <div class="col-md-6">
+            <center>
+                <img src="/media/accounts/1.jpg" style="height:330px; object-fit:cover;" alt="">
+            </center>
+                <br>
+                <div class="container">
+                    <h3 class="text-center">Features</h3>
+                    <ul style="list-style: none; padding:0;" class="text-secondary">
+                        <li>feature</li>
+                        <li>feature</li>
+                        <li>feature</li>
+                        <li>feature</li>
+                        <li>feature</li>
+                    </ul>
+                </div>
+
+                <div class="text-dark text-center">
+                    <a class="text-dark" href="">Contact us</a> |
+                    <a class="text-dark" href="">Login </a>
+                </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="container px-3 py-5 bg-white">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                <h4>New Account</h4>
+                <p>Welcome to Vyapaar Mitra</p>
+                <form action="{% url 'register' %}" autocomplete="off" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group mt-2">
+                        <label for="email">Name</label>
+                        <input type="text" autocomplete="off" name="username" class="form-control px-2" placeholder="john doe" id="">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="email">Email</label>
+                        <input type="email" autocomplete="off" name="email" class="form-control px-2" placeholder="john@email.com" id="">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="email">Password</label>
+                        <input type="password" autocomplete="off" name="password" class="form-control px-2" placeholder="***********"
+                            id="">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="email">Phone Number</label>
+                        <input type="number" name="phone_number" class="form-control px-2" placeholder="+91()10 Digits" id="">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="email">Address</label>
+                        <textarea  name="address" class="form-control px-2" ></textarea>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="email">GST Number</label>
+                        <input type="text" name="gst" class="form-control px-2" placeholder="GST Number" id="">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="email">FSSAI Code</label>
+                        <input type="text" name="fssai" class="form-control px-2" placeholder="FSSAI Code" id="">
+                    </div>
+                    <div class="form-group mt-3">
+                        <button class="login-btn">Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}
