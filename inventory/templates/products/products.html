@@ -1,0 +1,76 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+<div class="d-flex" style="min-width: 100vw;">
+    <div style="width: 230px;">
+        {% include 'home/sidebar.html' %}
+    </div>
+    <div style="width:85vw;">
+        {% include 'home/topbar.html' %}
+
+        <div class=" p-3 d-flex justify-content-between align-items-center"
+            style="width:100%; border-bottom:1px solid #d3d3d3;">
+            <h2>Current Stock</h2>
+            <div class="d-flex">
+                <form action="{% url 'search-products' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="search" class="form-control" placeholder="Search by name" style="width:600px">
+                </form>
+            </div>
+            
+        </div>
+        <div class="p-2">
+            <table class="table">
+                <tr>
+                    <th>Product ID</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Cost Price</th>
+                    <th>Selling Price</th>
+                    <th>Profit</th>
+                    <th>Category</th>
+                    <th>Stock</th>
+                    <th>Units</th>
+                </tr>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td><a href="{% url 'edit-product' product.id %}">{{product.unique_id}}</a></td>
+                        <td><img src="{{product.image.url}}" style="height: 80px;object-fit:fill;" alt="{{product.name}}"></td>
+                        <td>{{product.name}}</td>
+                        <td ><p style=" width:180px;overflow: hidden;text-wrap:nowrap; text-overflow: ellipsis;">{{product.description}}...</p></td>
+                        <td>{{product.cost_price}}</td>
+                        <td>{{product.selling_price}}</td>
+                        <td>{{product.profit}}</td>
+                        <td>{{product.category}}</td>
+                        <td>{{product.stock}}</td>
+                        <td>{{product.units}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- {% for product in products %}
+            <div class="d-flex align-items-center w-100">
+                <div class="product-image">
+                    <img src="{{product.image.url}}" style="height: 80px;object-fit:fill;" alt="{{product.name}}">
+                </div>
+                <div class="product-details mx-3 d-flex justify-content-evenly align-items-center">
+                    <h5>{{product.name}}</h5>
+                    <p class="text-secondary">
+                            {{product.description}}
+                    </p>
+                    <div class="d-flex">
+                        <b class="text-success">Stock: {{product.stock}}</b>
+                        <b class="text-success">Units: {{product.units}}</b>
+
+                    </div>
+                </div>
+            </div>
+           
+
+            {% endfor %}  -->
+        </div>
+</div>
+</div>
+{% endblock content %}

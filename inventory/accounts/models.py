@@ -15,9 +15,20 @@ class Account(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return self.phone
     
     def save(self, *args, **kwargs):
         if not self.unique_id:
             self.unique_id = self.phone
         super(Account, self).save(*args, **kwargs)
+
+
+class Customer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=255)
+    address = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.phone
