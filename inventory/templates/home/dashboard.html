@@ -1,5 +1,114 @@
 {% extends 'home/base.html' %}
 
+<style>
+.box{
+    border-radius: 20px;
+    background: #e0e0e0;
+    box-shadow:  14px 14px 28px #cacaca,
+             -14px -14px 28px #f6f6f6;
+    zoom: 0.9%;
+}
+
+</style>
+
 {% block content %}
-    {% include 'home/sidebar.html' %}
-{% endblock content %}
+
+
+<div class="d-flex" style="min-width: 100vw;">
+    <div style="width: 230px;">
+        {% include 'home/sidebar.html' %}
+    </div>
+    <div style="width:85vw;">
+        
+
+    <div class="container">
+        {% include 'home/topbar.html' %}
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <div class="card text-center box">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Revenue</h5>
+                        <h1>100 K</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Profit</h5>
+                        <h1>25%</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Products</h5>
+                        <h1>10</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Sales Analytics</h5>
+                        <div class="card-body">
+                            <!-- Add your chart or graph code here -->
+                            <img src="https://via.placeholder.com/500x300" class="img-fluid" alt="Annual Sales Chart">
+                          </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side Sections -->
+            <div class="col-md-4" style="width: 50vh;">
+                <!-- Low on Stock -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Low on Stock</h5>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-2">
+                              <i class="fas fa-box mr-2"></i>
+                              <span>Product 1</span>
+                              <span class="low-stock ml-auto">(Stock left: 2 days)</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                              <i class="fas fa-box mr-2"></i>
+                              <span>Product 2</span>
+                              <span class="low-stock ml-auto">(Stock left: 3 days)</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-box mr-2"></i>
+                                <span>Product 2</span>
+                                <span class="low-stock ml-auto">(Stock left: 3 days)</span>
+                              </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-box mr-2"></i>
+                                <span>Product 2</span>
+                                <span class="low-stock ml-auto">(Stock left: 3 days)</span>
+                            </div>
+                    </div>
+                </div>
+            </div>
+                <br>
+                <div class="col-md-4" style="width: 50vh;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Daily Analytics</h5>
+                        <div class="card-body">
+                            <p>Happy Customers: 150</p>
+                            <p>Recent Orders: 50</p>
+                            <!-- Add your chart or graph code here -->
+                            <img src="https://via.placeholder.com/300x150" class="img-fluid" alt="Daily Analytics Chart">
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

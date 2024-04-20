@@ -10,80 +10,33 @@
     border-right:solid 1px rgb(216, 216, 216);
     overflow: hidden;
 }
-.sidebar-collapse ul{
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
 .sidebar-collapse ul li{
     text-wrap:calc(0);
     cursor: pointer;
 }
-</style>
-<div class="fixed-top sidebar  bg-white pt-4 px-2">
-    <div class="user-profile d-flex mt-3" style="height: 50px;">
-        <!-- <div class="profile-name mx-2">
-            <h6 class="text-dark font-bold d-flex">{{org.name}}
+.sidebar>ul>li:hover {
+    background-color: grey;
+    color: white;
+    cursor: pointer;
+    padding-left: 10px;
+    transition: background-color 0.3s, padding-left 0.3s;
+}
+.sidebar>ul>li {
+    display: block;
+}
 
-            {% if org.is_verified %}
-                <span class="material-symbols-rounded text-primary">
-                    verified
-                </span>
-            {% else %}
-                <span class="material-symbols-rounded text-secondary">
-                    verified
-                </span>
-            {% endif %}</h6>
-            <p class="text-secondary text-small" style="margin-top: 1px;">{{org.unique_id}} . {{org.plan_details.plan_details.plan_name}}</p>
-        </div> -->
+</style>
+<div class="fixed-top sidebar bg-white pt-4 px-2">
+    <div class="user-profile d-flex mt-3" style="height: 5px;">
+
     </div>
     <hr>
     <ul>
-        <li class="font-bold"><i class="fa fa-calendar mx-2" aria-hidden="true"></i> My Events</li>
-        <ul class="mx-3">
-            <a href="{% url 'dashboard' %}">
-                <li class="text-secondary d-flex"><span class="material-symbols-outlined mr-2">
-                        alarm
-                    </span> Upcoming</li>
-            </a>
-            <li class="text-secondary"><i class="fa fa-check" aria-hidden="true"></i> Completed</li>
-            <a href="">
-                <li class="text-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create Event</li>
-            </a>
-        </ul>
-
-
-        <li class="font-bold"><i class="fa fa-dollar mx-2" aria-hidden="true"></i> Payments</li>
-        <ul class="mx-3">
-            <a href="">
-                <li class="text-secondary d-flex"><span class="material-symbols-outlined">
-                        analytics
-                    </span> Earnings</li>
-            </a>
-            <a href="">
-                <li class="text-secondary"><i class="fa fa-handshake" aria-hidden="true"></i> Payouts</li>
-            </a>
-        </ul>
-        <a href="#">
-            <li class="font-bold"><i class="fa fa-link" aria-hidden="true"></i> Integration</li>
-        </a>
-        <li class="font-bold"><i class="fa fa-user mx-2" aria-hidden="true"></i> Accounts</li>
-        <ul class="mx-3">
-            <a href="">
-                <li class="text-secondary"> <i class="fa fa-edit" aria-hidden="true"></i> Personal Info</li>
-            </a>
-            <a href="">
-                <li class="text-secondary"><i class="fa fa-user-group" aria-hidden="true"></i> Teams</li>
-            </a>
-            <a href="">
-                <li class="text-secondary"><i class="fa fa-key" aria-hidden="true"></i> Shared Access</li>
-            </a>
-            <a href="">
-                <li class="text-danger"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</li>
-            </a>
-
-        </ul>
-
-
+        <li><i class="fa fa-home mx-2" aria-hidden="true"></i>Dashboard<br><br></li>
+        <!-- <li><i class="fa fa-home mx-2" aria-hidden="true"></i>Dashboard<br><br></li> -->
+        <li><i class="fa fa-square-check mx-2" aria-hidden="true"></i> My Products<br><br></li>
+        <li><i class="fa fa-circle-plus mx-2" aria-hidden="true"></i> Add Product<br><br></li>
+        <li><i class="fa fa-arrow-trend-up mx-2" aria-hidden="true"></i> Stock Management<br><br></li>
+        <li><i class="fa fa-chart-simple mx-2" aria-hidden="true"></i> Reports & Analytics<br><br></li>
     </ul>
 </div>
