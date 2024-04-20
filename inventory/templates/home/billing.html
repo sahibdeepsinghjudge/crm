@@ -1,0 +1,82 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+
+<style>
+    .summary{
+        width: 300px;
+        height: 300px;
+        border-radius: 20px;
+        border-radius: 18px;
+        background: #e0e0e0;
+        box-shadow:  18px 18px 46px #acacac,
+                    -18px -18px 46px #ffffff;
+    }
+    .summary h4{
+        padding: 10px;
+    }
+</style>
+    <div class="d-flex">
+        <div style="width: 230px;">
+            {% include "home/sidebar.html" %}
+        </div>
+        <div style="width: 85vw;">
+           
+            <div class="container">
+            <h1 style="padding-left: 21px; margin-bottom:0px;">Current Invoice</h1>
+            <p style="padding-left: 21px; margin-top:0px;"> GST No : OBJWKKL234563</p>
+            <div class="d-flex justify-content-around space-between ">
+                <div class="order-table" style="width: 800px; overflow-y:scroll; height:500px">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Handle</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                <button class="btn btn-danger px-5" >Add Product</button>
+
+                </div>
+
+                <div class="order-summary">
+                    <div class="bg-dark p-2 text-white summary" >
+                        <h4>Order Summary</h4>
+                        <h4>Sub-Total</h4>
+                        <h4>Tax</h4>
+                        <h4>Total</h4>
+                    </div>
+                    <div class="d-flex mt-3" >
+                        <button class="btn btn-success px-5" >Paid</button>
+                        <button class="btn btn-dark mx-3 px-5" >Print</button>
+                    </div>
+
+                </div>
+               
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock content %}
