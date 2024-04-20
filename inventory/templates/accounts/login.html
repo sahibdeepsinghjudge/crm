@@ -1,0 +1,68 @@
+{% extends 'home/base.html' %}
+{% block content %}
+<style>
+    .center-box{
+        width: 800px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    a{
+        text-decoration: none;
+    }
+    .login-btn{
+        background-color: rgb(197, 110, 199);
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+    }
+</style>
+    <div class="center-box">
+        <div class="row shadow-sm rounded " style="height:400px;">
+            <div class="col-md-6">
+                <center>
+                <img src="/media/accounts/1.jpg" style="height:330px; object-fit:cover;" alt="">
+                <br>
+                <div class="text-dark">
+                            <a class="text-dark" href="">Contact us</a> |
+                            <a class="text-dark" href="">Create New Account</a>
+                </div>
+     
+                </center>
+            </div>
+            <div class="col-md-6">
+                <div class="container px-3 py-5 bg-white">
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    <h4>Sign In</h4>
+                    <p>to access account</p>
+                    <form action="{% url 'login' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group mt-2">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" class="form-control px-2" placeholder="john@email.com" id="">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="email">Password</label>
+                            <input type="password" name="password" class="form-control px-2" placeholder="***********" id="">
+                        </div>
+                        <div class="form-group mt-3">
+                            <button class="login-btn">Continue</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+
+    
+{% endblock content %}

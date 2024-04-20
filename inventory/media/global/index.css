@@ -1,0 +1,10 @@
+.center-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.rounded-20{
+    border-radius: 20px;
+}
