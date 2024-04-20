@@ -15,7 +15,7 @@ class OrderData(models.Model):
     is_delivered = models.BooleanField(default=False)
     is_paid = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    customer = models.ForeignKey('accounts.Customer', on_delete=models.CASCADE,null=True, blank=True)
+    customer = models.CharField(max_length=255)
     account = models.ForeignKey('accounts.Account', on_delete=models.CASCADE)
     products = models.TextField()
 

@@ -88,3 +88,11 @@ def initiate_order(request):
     request.session['order'] = order.order_id
     messages.success(request, 'Order initiated successfully')
     return redirect('view-products')
+
+def product_catalog(request):
+    products = Product.objects.filter(account__user=request.user)
+    return render(request, 'products/catalog.html', {'products': products})
+
+
+def billing_cart(request):
+    return render(request, 'home/billing.html')
