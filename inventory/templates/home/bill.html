@@ -1,0 +1,215 @@
+<!--
+    This component is used to display the bill of the order.
+    We tried to mimic the bill of the order as much as possible.
+    The structure of the page is simple and easy to understand.
+    Rows and Cols along with Flex properties is extensively used in this page.
+
+    Everthing wrapped in  is data from backend.
+
+    URL: /employee/bill/<invoice_number>
+-->
+
+{% extends 'home/base.html' %}
+{% block content %}
+
+
+<style>
+    .order_seller {
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .text-small {
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    h5 {
+        font-size: 12pt;
+    }
+
+    .logo-bwise {
+        height: 30px;
+        object-fit: contain;
+        filter: invert(1);
+    }
+
+    body {
+        background-color: white !important;
+        color: black !important;
+        margin: 0;
+        padding: 0;
+        counter-reset: Serial;
+    }
+
+    .print {
+        margin-top: -10px;
+
+    }
+
+    .auto-index tr td:first-child:before {
+        counter-increment: Serial;
+        /* Increment the Serial counter */
+        content: counter(Serial);
+        /* Display the counter */
+    }
+</style>
+
+<!--
+    To view a bill it must be genetrated first. We cannot see a bill just by going to the url.
+    If the bill is not generated then we will display a message.
+    Else we will display the bill.
+
+    BILL
+    -- is_generated: This is a boolean field which tells us whether the bill is generated or not.
+    -- invoice_number: This is the invoice number of the bill.
+    -- invoice_date: This is the date on which the bill was generated.
+    -- order: This is the order for which the bill is generated.
+        Order is it self a model or table in the database with its own fields. 
+-->
+
+
+
+
+<div class="p-4 bill">
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="d-flex flex-column">
+                <h2><b>Tax Invoice</b></h2>
+                <span class="order_seller">{{order.account.name}}
+                    <br>gstin:{{order.account.gst}}</span>
+                <span
+                    class="address-block">{{order.account.address}} {{order.account.city}}</span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex flex-column text-small mx-2 px-2">
+                    <span>Invoice No <b>{{order.invoice}}</b></span>
+                    <span>Order<b> # {{order.order_id}}</b></span>
+                </div>
+                <div class="d-flex flex-column text-small">
+                    <span>Invoice Date</span>
+                    <span><b> {{order.order_date|date:"M-d-Y"}}</b></span>
+                </div>
+                <div class="d-flex flex-column" style="width:30%;">
+                    <h5><b>ORIGINAL FOR RECIPIENT</b></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <table class="table auto-index">
+        <thead>
+            <th>S.No</th>
+            <th style="min-width: 500px;">Item(s)</th>
+            <th>Units</th>
+            <th>Rate(Rs.)</th>
+            <th>GST(Rs.)</th>
+            <th>TOTAL(Rs.)</th>
+        </thead>
+        <tbody>
+            {% for item in products %}
+           
+            <tr>
+                <td></td>
+                <td><b style="font-size: 16px;">{{item.name}}</b></td>
+                <td>{{item.units}}</td>
+                <td>{{item.selling_price}}</td> <!--Product price from table CatalogProducts-->                
+                <td>{{item.gst_price}} <br><b>{{item.gst}} %</b></td>
+                <td>{{item.total_price}}</td>
+            </tr>
+
+            {% endfor %}
+            <tr>
+                <td style="display: none;"></td>
+                <td>
+                    <b>TOTAL</b>
+                </td>
+
+                <td>{{order.get_products_count}}</td>
+                <td></td>
+                <td><b>{{order.order_total}} </b></td>
+                <td><b>{{order.order_tax}}</b></td>
+                <td><b> {{order.order_total_price}}</b></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-8">
+            <!--QR CODE-->
+            
+        </div>
+        <div class="col-md-4">
+            <table class=" table">
+                <tr>
+                    <td> <span class="d-flex justify-content-between"><b>Advance</b> <b> Rs. 0 </b> </span></td>
+                </tr>
+                <tr>
+                    <td> <span class="d-flex justify-content-between"><b>Grand Total</b> <b> Rs.
+                                {{order.order_total_price}} </b> </span></td>
+                </tr>
+                <tr style="text-transform:uppercase;">
+                    <td><b class="to_words" data-value="{{order.get_order_items.1}} "></b></td>
+                </tr>
+            </table>
+            <br>
+            <div class=" mt-4" style="float:right;">
+                <b>Authorised Signatory</b><br>
+                <span
+                    style="text-transform:uppercase;float:right;">{{order.seller_userid.get_profile.business_name}}</span>
+            </div>
+            <button class="btn btn-dark print">Print Bill</button>
+
+        </div>
+    </div>
+    <hr>
+   
+</div>
+
+
+<!--
+        The Script allow to hide the navbar and print the page when click on print button.
+    -->
+
+<script>
+    $(document).ready(function () {
+        $(".gst_val")
+        $(".navbar").addClass("d-none");
+        $(".side-nav-bar").addClass("d-none");
+
+        $(".print").on("click", function () {
+            $(this).css("visibility", "hidden");
+            window.print();
+
+        })
+    })
+
+    var a = ['', 'one ', 'two ', 'three ', 'four ', 'five ', 'six ', 'seven ', 'eight ', 'nine ', 'ten ', 'eleven ', 'twelve ', 'thirteen ', 'fourteen ', 'fifteen ', 'sixteen ', 'seventeen ', 'eighteen ', 'nineteen '];
+    var b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+
+    function inWords(num) {
+        if ((num = num.toString()).length > 9) return 'overflow';
+        n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+        if (!n) return; var str = '';
+        str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+        str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+        str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
+        str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
+        str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
+        console.log(str);
+        return str;
+
+    }
+
+
+    $(document).ready(function () {
+        var value = $(".to_words").attr("data-value");
+        console.log(value);
+        $(".to_words").html(inWords(parseInt(value)));
+    })
+
+</script>
+
+{% endblock content %}

@@ -1,11 +1,11 @@
-<div class="navbar navbar-expand-lg navbar-light bg-light" style="width: 100%; height: 60px">
+<div class="navbar navbar-expand-lg navbar-white bg-white" style="width: 100%; height: 60px">
     <div class="container-fluid" style="height: 30px;">
         <!-- <a class="navbar-brand" href="#">My App</a -->
 
-        <form class="d-flex" action="/search" method="GET" style="width: 70vw;">
+        <!-- <form class="d-flex" action="/search" method="GET" style="width: 70vw;">
             <input class="form-control me-2" type="search" placeholder="Search" name="q" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        </form> -->
         
         <div class="navbar-nav ms-auto">
             <a class="nav-link" href="#">Profile</a>
@@ -15,5 +15,11 @@
 </div>
 
 <!-- Main Content -->
-
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
 

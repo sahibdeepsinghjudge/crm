@@ -12,7 +12,7 @@
            >
             <h2>Select Items</h2>
             <div class="d-flex">
-                <form action="{% url 'search-products' %}" method="POST">
+                <form action="{% url 'search-products-catalog' %}" method="POST">
                     {% csrf_token %}
                     <input type="text" name="search" class="form-control" placeholder="Search by name" style="width:600px">
                 </form>
@@ -39,7 +39,7 @@
                         <td>{{product.category}}</td>
                         <td>{{product.stock}}</td>
                         <td>{{product.units}}</td>
-                        <td><button class="btn btn-dark">Add <i class="fa fa-plus-circle" aria-hidden="true"></i></button></td>
+                        <td><a href="{% url 'add-to-cart' product.id %}"><button class="btn btn-dark">Add <i class="fa fa-plus-circle" aria-hidden="true"></i></button></a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

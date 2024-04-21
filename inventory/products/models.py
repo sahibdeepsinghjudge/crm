@@ -32,6 +32,13 @@ class Product(models.Model):
         profit_percentage = (profit/self.cost_price)*100
         return f'{profit} ({profit_percentage}%)' 
 
+    def gst_price(self):
+        gst = self.selling_price * (self.gst/100)
+        return gst
+    
+    def total_price(self):
+        gst = self.selling_price * (self.gst/100)
+        return self.selling_price + gst
 
 class Category(models.Model):
     name = models.CharField(max_length=255)

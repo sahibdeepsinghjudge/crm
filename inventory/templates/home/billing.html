@@ -25,52 +25,47 @@
 
     <div class="container">
       <h1 style="padding-left: 21px; margin-bottom:0px;">Current Invoice</h1>
-      <p style="padding-left: 21px; margin-top:0px;"> GST No : OBJWKKL234563</p>
+      <p style="padding-left: 21px; margin-top:0px;"> Order Number: {{request.session.order}}</p>
       <div class="d-flex justify-content-around space-between ">
         <div class="order-table" style="width: 800px; overflow-y:scroll; height:500px">
           <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
+            <tr>
+              <th>Product ID</th>
+              <th>Name</th>
+              <th>Selling Price</th>
+              <th>Category</th>
+              <th>Stock</th>
+              <th>Units</th>
+              <th>Action</th>
+            </tr>
             <tbody>
+              {% for product in products %}
               <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td><a href="{% url 'edit-product' product.id %}">{{product.unique_id}}</a></td>
+                <td>{{product.name}}</td>
+                <td>{{product.selling_price}}</td>
+                <td>{{product.category}}</td>
+                <td>{{product.stock}}</td>
+                <td>{{product.units}}</td>
+                <td><a href="{% url 'remove-from-cart' forloop.counter0 %}"><button class="btn btn-dark">Remove <i class="fa fa-minus-circle"
+                        aria-hidden="true"></i></button></a></td>
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
-          <button class="btn btn-danger px-5">Add Product</button>
+          <a href="{% url 'catalog' %}"><button class="btn btn-danger px-5">Add Product</button></a>
 
         </div>
 
         <div class="order-summary">
           <div class="bg-dark p-2 text-white summary">
             <h4>Order Summary</h4>
-            <h4>Sub-Total</h4>
-            <h4>Tax</h4>
-            <h4>Total</h4>
+            <h4>Sub-Total {{order.order_total}} </h4>
+            <h4>Tax {{total_tax}}</h4>
+            <h4>Total {{total}} </h4>
           </div>
           <div class="d-flex mt-3">
-            <button class="btn btn-success px-5">Paid</button>
+            <a href="{% url 'complete-order' %}"><button class="btn btn-success px-5">Paid</button></a>
             <button class="btn btn-dark mx-3 px-5">Print</button>
           </div>
 

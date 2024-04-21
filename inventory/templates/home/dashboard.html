@@ -8,7 +8,9 @@
              -14px -14px 28px #f6f6f6;
     zoom: 0.9%;
 }
-
+.card{
+    border: none !important;
+}
 </style>
 
 {% block content %}
@@ -23,28 +25,29 @@
 
     <div class="container">
         {% include 'home/topbar.html' %}
-        <div class="row justify-content-center">
+        <div class="row justify-content-evenly mt-3">
             <div class="col-md-3">
-                <div class="card text-center box">
-                    <div class="card-body">
+                <div class="shadow-sm rounded p-3 d-flex align-items-center justify-content-center">
+                    <div>
                         <h5 class="card-title">Total Revenue</h5>
-                        <h1>100 K</h1>
+                        <h1 class="text-success">{{revenue}}</h1>
                     </div>
                 </div>
+                
             </div>
             <div class="col-md-3">
-                <div class="card text-center">
-                    <div class="card-body">
+                <div class="shadow-sm rounded p-3 d-flex align-items-center justify-content-center">
+                    <div>
                         <h5 class="card-title">Total Profit</h5>
-                        <h1>25%</h1>
+                        <h1 class="text-primary">{{profit}}%</h1>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card text-center">
-                    <div class="card-body">
+                <div class="shadow-sm rounded p-3 d-flex align-items-center justify-content-center">
+                    <div>
                         <h5 class="card-title">Total Products</h5>
-                        <h1>10</h1>
+                        <h1>{{total_products}}</h1>
                     </div>
                 </div>
             </div>
@@ -52,63 +55,92 @@
 
         <div class="row mt-4">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Sales Analytics</h5>
-                        <div class="card-body">
-                            <!-- Add your chart or graph code here -->
-                            <img src="https://via.placeholder.com/500x300" class="img-fluid" alt="Annual Sales Chart">
-                          </div>
-                    </div>
+                <div class="container">
+                    <h5 class="card-title">Sales Analytics</h5>
+                    <canvas id="Chart1" height="400" width="600"></canvas>
                 </div>
+                
             </div>
 
             <!-- Right Side Sections -->
-            <div class="col-md-4" style="width: 50vh;">
+            <div class="col-md-4">
                 <!-- Low on Stock -->
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Low on Stock</h5>
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-2">
-                              <i class="fas fa-box mr-2"></i>
-                              <span>Product 1</span>
-                              <span class="low-stock ml-auto">(Stock left: 2 days)</span>
-                            </div>
-                            <div class="d-flex align-items-center mb-2">
-                              <i class="fas fa-box mr-2"></i>
-                              <span>Product 2</span>
-                              <span class="low-stock ml-auto">(Stock left: 3 days)</span>
-                            </div>
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="fas fa-box mr-2"></i>
-                                <span>Product 2</span>
-                                <span class="low-stock ml-auto">(Stock left: 3 days)</span>
-                              </div>
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="fas fa-box mr-2"></i>
-                                <span>Product 2</span>
-                                <span class="low-stock ml-auto">(Stock left: 3 days)</span>
-                            </div>
+                <div class="container" style="max-height: 300px; min-height:100px; overflow-y:scroll;">
+                    <h5>Low on stock</h5>
+                    {% if low_stock %}
+                    {% for product in low_stock %}
+                    <div class="border-bottom  justify-content-between d-flex align-items-center px-3 py-2">
+                        <a href="{% url 'edit-product' product.id %}">
+                            {{product.name}}
+                        </a>
+                        <span>Stock: {{product.stock}}</span>
                     </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="border-bottom  justify-content-between d-flex align-items-center px-3 py-2">
+                        <span>No products low on stock</span>
+                    </div>
+                    {% endif %}
                 </div>
-            </div>
                 <br>
-                <div class="col-md-4" style="width: 50vh;">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Daily Analytics</h5>
-                        <div class="card-body">
-                            <p>Happy Customers: 150</p>
-                            <p>Recent Orders: 50</p>
-                            <!-- Add your chart or graph code here -->
-                            <img src="https://via.placeholder.com/300x150" class="img-fluid" alt="Daily Analytics Chart">
-                          </div>
-                    </div>
+                <div class="container">
+                    <h5> Daily Analytics</h5>
+                    <canvas id="Chart2" height="400" width="400"></canvas>
                 </div>
-            </div>
         </div>
     </div>
     </div>
     </div>
+    <script>
+        fetch("{% url 'charts-data' %}").then(response => response.json()).then(data => {
+            console.log(data);
+            //get keys of the data
+            const xValues = data["dataX"];
+            const yValues = data["dataY"];
+            const xValues2 = data["dataX2"];
+            const yValues2 = data["dataY2"];
+            new Chart("Chart1", {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        label:"Sales",
+                        fill: true,
+                        lineTension: 0,
+                        backgroundColor: "rgba(49, 104, 224, 0.58)",
+                        borderColor: "#295CDE",
+                        data: yValues,
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    scales: {
+                        yAxes: [{ ticks: { beginAtZero: true } }]
+                    }
+                }
+            });
+
+        new Chart("Chart2", {
+                type: "line",
+                data: {
+                    labels: xValues2,
+                    datasets: [{
+                        label: "Cutomer Count",
+                        fill: true,
+                        lineTension: 0,
+                        backgroundColor: "rgba(49, 104, 224, 0.58)",
+                        borderColor: "#295CDE",
+                        data: yValues2,
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    scales: {
+                        yAxes: [{ ticks: { beginAtZero: true } }]
+                    }
+                }
+            });
+        });
+
+    </script>
 {% endblock %}

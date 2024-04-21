@@ -12,7 +12,7 @@ class Account(models.Model):
     fssai = models.CharField(max_length=14, default='N/A')
     image = models.ImageField(upload_to='accounts/', default='accounts/default.jpg')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
+    city = models.CharField(default='Amritsar', max_length=255)
 
     def __str__(self):
         return self.phone
