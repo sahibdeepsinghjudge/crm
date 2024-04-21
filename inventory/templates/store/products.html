@@ -1,0 +1,145 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background-color: grey;
+        color: #fff;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    nav a {
+        color: #fff;
+        text-decoration: none;
+        margin-left: 10px;
+    }
+    .hero {
+        background-image: url("media/global/banner2.png");
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        text-align: center;
+    }
+    .hero h2 {
+        font-size: 30px;
+        padding-top: 50px;
+    }
+    .hero h1 {
+        font-size: 50px;
+        padding-top: 50px;
+    }
+    .hero p {
+        font-size: 16px;
+    }
+    .Products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+    }
+    .Product {
+        background-color: #f4f4f4;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px;
+        text-align: center;
+        width: 300px;
+        height: 300px;
+        border-radius: 10px;
+    }
+    .Product img {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+    }
+    .Product button {
+        background-color: #fff;
+        color: blue;
+        border: none;
+        padding: 5px 30px;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+    .Product button:hover {
+        background-color: blue;
+        color: #fff;
+    }
+    .Product h3 {
+        font-size: 20px;
+    }
+  </style>
+
+  <body>
+    <header>
+      <div class="logo">Logo</div>
+      <nav>
+        <a href="#">Sign Up</a>
+        <a href="#">Login</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+        <h1>Shop Name</h1>
+        <p>Shop Address</p>
+        <h2>Welcome to Our Store</h2>
+        <p>Check out our products below</p>
+    </div>
+
+    <h1 style="font-size: 30px; justify-content: center; text-align: center; align-items: center; padding-top: 25px">View All Products</h1>
+
+    <div class="Products" id="Products">
+        <div class="Product">
+            <i class="fa fa-circle-plus mx-4" style="font-size: 60px"></i><br><br>
+            <h3>Product Name</h3><br><br>
+            <button>View Product</button><br><br>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="Product">
+            <i class="fa fa-circle-plus mx-4" style="font-size: 60px"></i><br><br>
+            <h3>Product Name</h3><br><br>
+            <button>View Product</button><br><br>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="Product">
+            <i class="fa fa-circle-plus mx-4" style="font-size: 60px"></i><br><br>
+            <h3>Product Name</h3><br><br>
+            <button>View Product</button><br><br>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="Product">
+            <i class="fa fa-circle-plus mx-4" style="font-size: 60px"></i><br><br>
+            <h3>Product Name</h3><br><br>
+            <button>View Product</button><br><br>
+            <button>Add to Cart</button>
+        </div>
+        <div class="Product">
+            <i class="fa fa-circle-plus mx-4" style="font-size: 60px"></i><br><br>
+            <h3>Product Name</h3><br><br>
+            <button>View Product</button><br><br>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="Product">
+            <i class="fa fa-circle-plus mx-4" style="font-size: 60px"></i><br><br>
+            <h3>Product Name</h3><br><br>
+            <button>View Product</button><br><br>
+            <button>Add to Cart</button>
+        </div>
+
+    </div>
+  </body>
+{% endblock %}
