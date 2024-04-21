@@ -1,4 +1,4 @@
-<h1 align="center">Local Business Solution</h1>
+<h1 align="center">Vyapar Mitra</h1>
 
 <h3 align="center">Building Local Solution</h3>
 <p align="right">
