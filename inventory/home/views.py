@@ -9,11 +9,12 @@ from django.db.models.functions import (
 # Create your views here.
 
 def dashboard(request):
+    print(request.user)
     total_products = Product.objects.filter(account__user=request.user).count()
     orders = OrderData.objects.filter(account__user=request.user)
     products = Product.objects.filter(account__user=request.user)
     low_stock = products.filter(stock__lte=10)
-    daily_sale = OrderData.objects.all().annotate(date=TruncDay('created_at')).values('date').annotate(total=Sum('order_total')).order_by('date')
+    daily_sale = OrderData.objects.filter(account__user = request.user).annotate(date=TruncDay('created_at')).values('date').annotate(total=Sum('order_total')).order_by('date')
     print(daily_sale)
     revenue = 0
     cp = 0
@@ -29,8 +30,8 @@ def dashboard(request):
 
 
 def charts_data(request):
-    daily_sale = OrderData.objects.all().annotate(date=TruncDay('created_at')).values('date').annotate(total=Sum('order_total')).order_by('date')
-    daily_orders_count = OrderData.objects.all().annotate(date=TruncDay('created_at')).values('date').annotate(count=Count('id')).order_by('date')
+    daily_sale = OrderData.objects.filter(account__user = request.user).annotate(date=TruncDay('created_at')).values('date').annotate(total=Sum('order_total')).order_by('date')
+    daily_orders_count = OrderData.objects.filter(account__user = request.user).annotate(date=TruncDay('created_at')).values('date').annotate(count=Count('id')).order_by('date')
     dataX2 = []
     dataY2 = []
     for sale in daily_orders_count:

@@ -1,15 +1,15 @@
 from django.shortcuts import redirect, render
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate,login
 from django.contrib import messages
 from django.contrib.auth.models import User
-
+from django.db import transaction
 from .models import Account
 # Create your views here.
 def login_page(request):
     return render(request, 'accounts/login.html')
 
 
-def login(request):
+def login_handler(request):
     if request.method== 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -17,12 +17,14 @@ def login(request):
         try:
             user = authenticate(username=username, password=password)
             if user is not None:
+                login(request, user)
                 messages.success(request, 'Login successful')
                 return redirect('dashboard')
             else:
                 messages.info(request, 'Invalid username or password')
                 return redirect('login-page')
-        except:
+        except Exception as e:
+            print(e)
             messages.info(request, 'Invalid username or password')
             return redirect('login-page')
         
@@ -30,7 +32,7 @@ def login(request):
 def register_page(request):
     return render(request, 'accounts/register.html')
 
-
+@transaction.atomic
 def register(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -51,7 +53,8 @@ def register(request):
             Account.objects.create(phone=phone_number, address=address, gst=gst, fssai=fssai, user=user)
             messages.success(request, 'Account created successfully')
             return redirect('login-page')
-        except:
+        except Exception as e:
+            print(e)
             messages.info(request, 'Account creation failed')
             return redirect('register-page')
        
