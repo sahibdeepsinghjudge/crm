@@ -22,7 +22,7 @@
         margin-left: 10px;
     }
     .hero {
-        background-image: url("media/global/banner2.png");
+        background-image: url("/media/global/banner2.png");
         background-size: cover;
         background-position: center;
         height: 300px;
@@ -81,17 +81,11 @@
   </style>
 
   <body>
-    <header>
-      <div class="logo">Logo</div>
-      <nav>
-        <a href="#">Sign Up</a>
-        <a href="#">Login</a>
-      </nav>
-    </header>
+
 
     <div class="hero">
-        <h1>Shop Name</h1>
-        <p>Shop Address</p>
+        <h1>{{account.shop_name}}</h1>
+        <p>{{account.address}}</p>
         <h2>Welcome to Our Store</h2>
         <p>Check out our products below</p>
     </div>
@@ -99,47 +93,13 @@
     <h1 style="font-size: 30px; justify-content: center; text-align: center; align-items: center; padding-top: 25px">View All Products</h1>
 
     <div class="Products" id="Products">
+        {% for product in products %}
         <div class="Product">
-            <i class="fa fa-circle-plus mx-4" style="font-size: 60px"></i><br><br>
-            <h3>Product Name</h3><br><br>
-            <button>View Product</button><br><br>
+            <img src="{{product.image.url}}" style="width: 250px; height:150px; object-fit:fill;" alt="">
+            <h3>{{product.name}}</h3><br><br>
             <button>Add to Cart</button>
         </div>
-
-        <div class="Product">
-            <i class="fa fa-circle-plus mx-4" style="font-size: 60px"></i><br><br>
-            <h3>Product Name</h3><br><br>
-            <button>View Product</button><br><br>
-            <button>Add to Cart</button>
-        </div>
-
-        <div class="Product">
-            <i class="fa fa-circle-plus mx-4" style="font-size: 60px"></i><br><br>
-            <h3>Product Name</h3><br><br>
-            <button>View Product</button><br><br>
-            <button>Add to Cart</button>
-        </div>
-
-        <div class="Product">
-            <i class="fa fa-circle-plus mx-4" style="font-size: 60px"></i><br><br>
-            <h3>Product Name</h3><br><br>
-            <button>View Product</button><br><br>
-            <button>Add to Cart</button>
-        </div>
-        <div class="Product">
-            <i class="fa fa-circle-plus mx-4" style="font-size: 60px"></i><br><br>
-            <h3>Product Name</h3><br><br>
-            <button>View Product</button><br><br>
-            <button>Add to Cart</button>
-        </div>
-
-        <div class="Product">
-            <i class="fa fa-circle-plus mx-4" style="font-size: 60px"></i><br><br>
-            <h3>Product Name</h3><br><br>
-            <button>View Product</button><br><br>
-            <button>Add to Cart</button>
-        </div>
-
+        {% endfor %}
     </div>
   </body>
 {% endblock %}
