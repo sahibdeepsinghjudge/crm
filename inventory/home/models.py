@@ -15,7 +15,7 @@ class OrderData(models.Model):
     is_online = models.BooleanField(default=False)
     is_delivered = models.BooleanField(default=False)
     is_paid = models.BooleanField(default=False)
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(default=timezone.now)
     customer = models.CharField(max_length=255)
     account = models.ForeignKey('accounts.Account', on_delete=models.CASCADE)
     products = models.TextField()
@@ -39,3 +39,7 @@ class OrderData(models.Model):
     def order_total_price(self):
         return self.order_total + self.order_tax
     
+    def profit(self):
+        profit = self.order_total - self.order_cost
+        profit_percentage = (profit/self.order_cost)*100
+        return f'{profit} ({profit_percentage}%)'

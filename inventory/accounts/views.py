@@ -34,7 +34,11 @@ def register_page(request):
 def register(request):
     if request.method == 'POST':
         username = request.POST.get('username')
-        username.replace(' ', '')
+        for i in username:
+            if i == ' ':
+                messages.info(request, 'Username cannot contain spaces')
+                return redirect('register-page')
+            
         email = request.POST.get('email')
         password = request.POST.get('password')
         phone_number = request.POST.get('phone_number')

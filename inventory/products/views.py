@@ -166,7 +166,7 @@ def complete_order(request):
     request.session['order'] = None
     order.save()
     messages.success(request, 'Order completed successfully')
-    return redirect('view-products')
+    return redirect('/products/bill/{}'.format(order.id))
 
 
 def bill(request,id):
@@ -183,4 +183,6 @@ def bill(request,id):
         pass
     
         
-
+def order_records(request):
+    orders = OrderData.objects.filter(account__user=request.user)
+    return render(request,'home/orders_records.html',{'orders':orders})
